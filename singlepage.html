@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single Page</title>
+<style>
+        div {display: none;}                      /* initially the data will be invisible*/
+</style>
+<script>
+    function showPage(page){                                             
+        document.querySelectorAll('div').forEach(div=>{
+            div.style.display = 'none';                            /* all the data except the data button you clicked on will be invisible*/
+        })
+        document.querySelector(`#${page}`).style.display = 'block';      /* showing the particular data*/
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){                  /* after loading the content on the page*/
+        document.querySelectorAll('button').forEach(button =>{
+            button.onclick = function(){                         /* on clicking the particular button, respective data will be shown*/
+                showPage(this.dataset.page);
+            }
+        });
+    });
+</script>
+
+</head>
+<body>
+    <!-- buttons for the respective data -->
+    <button data-page="page1">Page1</button>
+    <button data-page="page2">Page2</button>
+    <button data-page="page3">Page3</button>
+
+    <!-- Div for the respective data -->
+    <div id="page1"><h3>This is Page1</h3></div>
+    <div id="page2"><h3>This is Page2</h3></div>
+    <div id="page3"><h3>This is Page3</h3></div>
+</body>
+</html>
