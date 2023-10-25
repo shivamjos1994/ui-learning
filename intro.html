@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>Intro to React</title>
+</head>
+<body>
+    <div id="app"></div>
+    <!-- babel converts the JSX code into js code -->
+    <script type="text/babel">
+        // function App is a react component that is rendered to the page.
+        function App(){
+            const x = 1;
+            const y = 2;
+            return(
+                <div> Hello World! {x + y}</div>
+            );
+        }
+        // with the help of ReactDOM, rendering the App component to the div
+        ReactDOM.render(<App />, document.querySelector('#app'));
+    </script>
+</body>
+</html>

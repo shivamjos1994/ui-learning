@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>Addition</title>
+    <style>
+        #app{
+            text-align: center;
+            font-family: sans-serif;
+        }
+        #problem{
+            font-size: 55px;
+        }
+        .incorrect{
+            color: red;
+        }
+        #winner{
+            font-size: 70px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+         function App(){
+            // avoid this 
+            // const [num1, setNum1] = React.useState(1)
+            // const [num2, setNum2] = React.useState(2)
+
+            // we can create state of multiple variables inside a single object.
+            const [state, setState] = React.useState({
+                num1: Math.ceil(Math.random()*20),
+                num2: Math.ceil(Math.random()*20),
+                response: "",
+                score: 0,
+                incorrect: false
+            });
+            
+            // on pressing the enter key
+            function inputKeyPress(event){
+                 if(event.key === "Enter"){
+                    const answer = parseInt(state.response)
+                    if(state.num1 + state.num2 === answer){
+                        // user get question right, update the numbers and the score,clear the response and the text color remains the same.
+                        setState({
+                            ...state,
+                            // numbers and the score will change.
+                            num1: Math.ceil(Math.random()*20),
+                            num2: Math.ceil(Math.random()*20),
+                            score: state.score + 1,
+                            response: "",
+                            incorrect: false
+                        });
+                    }
+                    else{
+                        // user get question wrong, decrease the score, clear the response and color changes to red.
+                        setState({
+                            ...state,
+                            score: state.score - 1,
+                            response: "",
+                            incorrect: true
+                        });
+                    }
+                 }
+            }
+
+
+            // updating the response.
+            function updateResponse(event){
+                setState({
+                    // spread operator(use existing values of state for everything else, just update the response)
+                       ...state, 
+                       response: event.target.value
+                });
+            }
+            
+            // if the user get 10 correct answers.
+            if(state.score === 10){
+               return(
+                <div id="winner">You Won!!</div>
+               );
+            }
+
+            return( 
+              <div>
+                <div className={state.incorrect ? "incorrect" : ""} id="problem">{state.num1} + {state.num2}</div>
+                <input autoFocus={true} onKeyPress={inputKeyPress} onChange={updateResponse} value={state.response}/>
+                <div>Score: {state.score}</div>
+                </div>
+            );
+         }
+         ReactDOM.render(<App />, document.querySelector('#app'));
+    </script>
+</body>
+</html>
