@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>Properties</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+        // passing the props as an argument to the Hello component
+        function Hello(props){
+            return(
+                // accessing the name prop 
+                <h3>Hey {props.name}!</h3>
+            );
+        }
+
+         function App(){
+            return( 
+            //   react components can take attributes called props or properties.
+               <div>
+                   <Hello name="Ram"/>
+                   <Hello name="Shyam"/>
+                   <Hello name="Mohan"/>
+                </div>
+
+            );
+         }
+         ReactDOM.render(<App />, document.querySelector('#app'));
+    </script>
+</body>
+</html>
